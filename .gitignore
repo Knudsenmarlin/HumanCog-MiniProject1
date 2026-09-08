@@ -1,0 +1,51 @@
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+Icon
+
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyd
+*.pyo
+*.pyo
+
+# Distribution / packaging
+build/
+dist/
+eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+pip-wheel-metadata/
+wheelhouse/
+
+# Virtual environments
+env/
+venv/
+.venv/
+ENV/
+.env
+.envrc
+
+# pip
+pip-log.txt
+pip-delete-this-directory.txt
+
+# OneDrive/temp
+~$*
+
+# Ignore virtualenv created by Python's venv module inside project
+.venv/
+
+# Local env files
+.env*
+
+# End of file
