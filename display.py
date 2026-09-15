@@ -15,6 +15,7 @@ def display_sequence(
     font_size: int = 120,
     on_finish: Optional[Callable] = None,
     tts: bool = False,
+    sleep: int = 0,
     csv_name: str = "free_recall.csv",
 ):
     """
@@ -24,8 +25,9 @@ def display_sequence(
         1. Press Enter to start
         2. Enter name
         3. Sequence is displayed
-        4. Enter recalled items one at a time
-        5. Results are saved to free_recall.csv
+        4. Wait for `sleep` seconds
+        5. Enter recalled items one at a time
+        6. Results are saved to CSV
 
     CSV columns:
         name
@@ -43,6 +45,9 @@ def display_sequence(
 
     csv_path = "experiments/" + csv_name
 
+    # Create experiments directory if it doesn't exist
+    os.makedirs("experiments", exist_ok=True)
+
     # ------------------------------------------------------------
     # Normalize sequence
     # ------------------------------------------------------------
@@ -53,6 +58,9 @@ def display_sequence(
         seq = [sequence]
 
     auto = isinstance(interval, (int, float))
+
+    # Make sure sleep is valid
+    wait_seconds = max(0, float(sleep))
 
     # ------------------------------------------------------------
     # Text-to-speech
@@ -132,7 +140,7 @@ def display_sequence(
         highlightthickness=0,
     )
 
-    # Don't show it initially
+    # Don't show input initially
     entry.pack_forget()
 
     # ------------------------------------------------------------
@@ -164,7 +172,7 @@ def display_sequence(
     # ------------------------------------------------------------
 
     def cancel_after():
-        """Cancel any scheduled sequence advancement."""
+        """Cancel any scheduled Tkinter callback."""
 
         if state["after_id"] is not None:
             try:
@@ -246,7 +254,7 @@ def display_sequence(
 
         # Sequence is over
         if i >= len(seq):
-            begin_recall()
+            begin_waiting()
             return
 
         item = seq[i]
@@ -314,7 +322,50 @@ def display_sequence(
         show_current()
 
     # ------------------------------------------------------------
-    # Phase 3: Free recall
+    # Phase 3: Waiting period
+    # ------------------------------------------------------------
+
+    def begin_waiting():
+        """
+        Show a static waiting message for the requested amount
+        of time.
+
+        Example:
+            sleep=30
+
+        Displays:
+
+            Waiting 30 seconds
+
+        for the full 30 seconds. It does NOT count down.
+        """
+
+        cancel_after()
+
+        state["phase"] = "waiting"
+
+        # Hide the text entry if it happens to be visible
+        entry.pack_forget()
+
+        # Format whole numbers without ".0"
+        if wait_seconds.is_integer():
+            wait_text = str(int(wait_seconds))
+        else:
+            wait_text = str(wait_seconds)
+
+        label.config(
+            text=f"Waiting {wait_text} seconds",
+            font=("Helvetica", 80),
+        )
+
+        # After the full wait period, begin recall
+        state["after_id"] = root.after(
+            int(wait_seconds * 1000),
+            begin_recall,
+        )
+
+    # ------------------------------------------------------------
+    # Phase 4: Free recall
     # ------------------------------------------------------------
 
     def begin_recall():
@@ -587,9 +638,10 @@ if __name__ == "__main__":
     display_sequence(
         ["A", "car", "42"],
         interval=2,
+        sleep=0,
         bg="black",
         fg="white",
         font_size=720,
         tts=True,
-        csv_path="free_recall.csv",
+        csv_name="test.csv",
     )
