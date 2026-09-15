@@ -15,10 +15,11 @@ def random_nums(count=15, interval=(10, 99)):
 
 if __name__ == "__main__":
     display_sequence(
-        random_nums(count=15, interval=(10, 99)),
-        2,
+        random_nums(count=10, interval=(10, 99)),
+        1,
         font_size=512,
-        tts=True
+        tts=True,
+        csv_name="test.csv"
     )
 # def display_sequence(
 #     sequence: Any,

@@ -15,7 +15,7 @@ def display_sequence(
     font_size: int = 120,
     on_finish: Optional[Callable] = None,
     tts: bool = False,
-    csv_path: str = "free_recall.csv",
+    csv_name: str = "free_recall.csv",
 ):
     """
     Fullscreen sequence presentation + free recall task.
@@ -40,6 +40,8 @@ def display_sequence(
         Enter  -> submit current answer
         Escape -> finish recall early and save results
     """
+
+    csv_path = "experiments/" + csv_name
 
     # ------------------------------------------------------------
     # Normalize sequence
