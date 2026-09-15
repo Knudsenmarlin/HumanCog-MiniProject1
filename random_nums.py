@@ -2,16 +2,16 @@ import random as r
 from display import display_sequence
 
 def random_nums(count=15, interval=(10, 99)):
-    l = []
-    for _ in range(count):
+    nums = []
+
+    while len(nums) < count:
         num = r.randint(interval[0], interval[1])
-        if num in l:
-            pass
-        else:
-            l.append(num)
-    
-    print(l)
-    return l
+
+        if num not in nums:
+            nums.append(num)
+
+    print(nums)
+    return nums
 
 if __name__ == "__main__":
     display_sequence(
