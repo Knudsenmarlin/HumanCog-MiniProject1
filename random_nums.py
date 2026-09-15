@@ -1,10 +1,10 @@
 import random as r
 from display import display_sequence
 
-def random_nums(times, range: tuple[int, int]):
+def random_nums(count=15, interval=(10, 99)):
     l = []
-    for _ in range(times):
-        num = r.randint(range[0], range[1])
+    for _ in range(count):
+        num = r.randint(interval[0], interval[1])
         if num in l:
             pass
         else:
@@ -15,7 +15,7 @@ def random_nums(times, range: tuple[int, int]):
 
 if __name__ == "__main__":
     display_sequence(
-        random_nums(times=15, range=(10, 99)),
+        random_nums(count=15, interval=(10, 99)),
         2,
         font_size=512,
         tts=True
