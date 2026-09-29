@@ -8,10 +8,10 @@ from random_nums import random_nums
 from display import display_sequence
 
 # ============================================================
-# NORMAL SETTINGS FOR CONTROLE EXPERIMENT
+# NORMAL SETTINGS FOR CONTROL EXPERIMENT
 # ============================================================
 
-nums = random_nums(count=5, interval=(10, 99))
+nums = random_nums(count=15, interval=(10, 99))
 
 # settings
 display_sequence(

@@ -14,12 +14,12 @@ from display import display_sequence
 # settings are normal and same for controle experiments
 # ============================================================
 
-nums = random_nums(count=5, interval=(10, 99))
+nums = random_nums(count=15, interval=(10, 99))
 
 # settings
 display_sequence(
     nums,
-    interval=1,
+    interval=2,
     font_size=512,
     tts=True,
     csv_name="recency.csv"

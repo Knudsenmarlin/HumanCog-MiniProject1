@@ -13,7 +13,7 @@ from display import display_sequence
 # adjusting interval/speed it shows the number
 # ============================================================
 
-nums = random_nums(count=5, interval=(10, 99))
+nums = random_nums(count=15, interval=(10, 99))
 
 # settings
 display_sequence(
