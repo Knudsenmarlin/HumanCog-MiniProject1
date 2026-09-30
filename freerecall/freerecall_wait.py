@@ -13,7 +13,7 @@ from display import display_sequence
 # After numbers are shown you are forced to wait X seconds
 # ============================================================
 
-nums = random_nums(count=5, interval=(10, 99))
+nums = random_nums(count=15, interval=(10, 99))
 
 # settings
 display_sequence(
